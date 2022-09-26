@@ -1,0 +1,49 @@
+{
+  "add-field-type":{
+     "name":"ingredientsType",
+     "class":"solr.TextField",
+     "positionIncrementGap":"100",
+     "analyzer":{
+        "tokenizer":{
+           "class":"solr.ClassicTokenizerFactory" },
+        "filters":[
+           {"class":"solr.LowerCaseFilterFactory"},
+		   {"class":"solr.EnglishMinimalStemFilterFactory"},
+		   {"class":"solr.EnglishPossessiveFilterFactory"},
+		   {"class":"solr.HyphenatedWordsFilterFactory"},
+		   {"class":"solr.KStemFilterFactory"}
+		   ]}},
+   "add-field" : [
+      {
+         "name": "id_recipe",
+         "type": "text_general",
+         "indexed": true,
+         "stored": true
+       },
+      {
+         "name": "title",
+         "type": "text_general",
+         "indexed": true,
+         "stored": true
+       },
+       {
+         "name": "ingredients",
+         "type": "ingredientsType",
+         "omitNorms": true,
+         "omitTermFreqAndPositions": true,
+         "docValues": true,
+         "indexed": true,
+         "stored": true
+       },
+       {
+         "name": "instructions",
+         "type": "string",
+         "omitNorms": true,
+         "omitTermFreqAndPositions": true,
+         "indexed": true,
+         "stored": true,
+         "sortMissingLast": true,
+         "docValues": true
+       }
+     ]
+}
